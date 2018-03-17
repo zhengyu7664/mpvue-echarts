@@ -43,11 +43,6 @@ export default {
       return;
     }
 
-    if (!this.ec.onInit) {
-      console.warn('请传入 onInit 函数进行初始化');
-      return;
-    }
-
     if (!this.ec.lazyLoad) {
       setTimeout(() => this.init(), 50);
     }
@@ -61,6 +56,11 @@ export default {
         console.error('微信基础库版本过低，需大于等于 1.9.91。'
           + '参见：https://github.com/ecomfe/echarts-for-weixin'
           + '#%E5%BE%AE%E4%BF%A1%E7%89%88%E6%9C%AC%E8%A6%81%E6%B1%82');
+        return;
+      }
+
+      if (!this.ec.onInit) {
+        console.warn('请传入 onInit 函数进行初始化');
         return;
       }
 

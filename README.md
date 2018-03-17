@@ -79,6 +79,10 @@ export default {
 
 ## 常见问题
 
+## Tips
+
+### 不要把 chart 实例赋值到 this（vue 实例） 上
+
 ## FAQ
 
 ### 如何获取图表实例？
