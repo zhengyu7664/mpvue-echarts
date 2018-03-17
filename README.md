@@ -38,7 +38,7 @@ function initChart(canvas, width, height) {
 
   chart.setOption(option);
 
-  // return chart; 不要返回 chart
+  return chart; // 返回 chart 后可以自动绑定触摸操作
 }
 
 export default {

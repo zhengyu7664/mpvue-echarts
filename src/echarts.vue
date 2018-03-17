@@ -5,13 +5,16 @@
     :canvasId="canvasId"
     @touchstart="touchStart"
     @touchmove="touchMove"
-    @touchend="touchEnd">
+    @touchend="touchEnd"
+    @error="error">
   </canvas>
 </template>
 
 <script>
 import * as echarts from 'echarts';
 import WxCanvas from './wx-canvas';
+
+let chart;
 
 export default {
   props: {
@@ -76,39 +79,39 @@ export default {
           setTimeout(() => this.init(), 50);
           return;
         }
-        this.chart = this.ec.onInit(canvas, res.width, res.height);
+        chart = this.ec.onInit(canvas, res.width, res.height);
       }).exec();
     },
     touchStart (e) {
-      if (this.chart && e.touches.length > 0) {
+      if (chart && e.touches.length > 0) {
         var touch = e.touches[0];
-        this.chart._zr.handler.dispatch('mousedown', {
+        chart._zr.handler.dispatch('mousedown', {
           zrX: touch.x,
           zrY: touch.y
         });
-        this.chart._zr.handler.dispatch('mousemove', {
+        chart._zr.handler.dispatch('mousemove', {
           zrX: touch.x,
           zrY: touch.y
         });
       }
     },
     touchMove (e) {
-      if (this.chart && e.touches.length > 0) {
+      if (chart && e.touches.length > 0) {
         var touch = e.touches[0];
-        this.chart._zr.handler.dispatch('mousemove', {
+        chart._zr.handler.dispatch('mousemove', {
           zrX: touch.x,
           zrY: touch.y
         });
       }
     },
     touchEnd (e) {
-      if (this.chart) {
+      if (chart) {
         const touch = e.changedTouches ? e.changedTouches[0] : {};
-        this.chart._zr.handler.dispatch('mouseup', {
+        chart._zr.handler.dispatch('mouseup', {
           zrX: touch.x,
           zrY: touch.y
         });
-        this.chart._zr.handler.dispatch('click', {
+        chart._zr.handler.dispatch('click', {
           zrX: touch.x,
           zrY: touch.y
         });
