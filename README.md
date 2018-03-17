@@ -77,13 +77,9 @@ export default {
 | canvasId    | String         | ec-canvas     | canvasId      |
 
 
-## 常见问题
-
-## Tips
-
-### 不要把 chart 实例赋值到 this（vue 实例） 上
-
 ## FAQ
+
+### [重要] 不要把 chart 实例赋值到 this（vue 实例） 上
 
 ### 如何获取图表实例？
 
@@ -155,4 +151,4 @@ ECharts 中的绝大部分功能都支持小程序版本，因此这里仅说明
 
 ## Todo
 
-- [ ]  支持自定义 echarts 版本
+- [x]  ~~支持自定义 echarts 版本~~（突然想到这个利用 webpack 的 alias 实现就好了）
