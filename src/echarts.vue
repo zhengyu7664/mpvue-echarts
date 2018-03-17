@@ -73,6 +73,10 @@ export default {
 
       var query = wx.createSelectorQuery();
       query.select('.ec-canvas').boundingClientRect(res => {
+        if (!res) {
+          setTimeout(() => this.init(), 50);
+          return;
+        }
         this.chart = this.ec.onInit(canvas, res.width, res.height);
       }).exec();
     },
