@@ -5,8 +5,7 @@
     :canvasId="canvasId"
     @touchstart="touchStart"
     @touchmove="touchMove"
-    @touchend="touchEnd"
-    @error="error">
+    @touchend="touchEnd">
   </canvas>
 </template>
 
