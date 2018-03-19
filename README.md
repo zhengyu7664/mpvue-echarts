@@ -87,11 +87,11 @@ export default {
 
 ### 如何延迟加载图表？
 
-参见 `pages/lazyLoad` 的例子，可以在获取数据后再初始化数据。 
+参见 `examples/lazyLoad` 的例子，可以在获取数据后再初始化数据。 
 
 ### 如何在一个页面中加载多个图表？
 
-参见 `pages/multiCharts` 的例子。
+参见 `examples/multiCharts` 的例子。
 
 ### 为什么不支持 Tooltip？
 
