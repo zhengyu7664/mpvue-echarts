@@ -6,6 +6,10 @@
 [![npm downloads](https://img.shields.io/npm/dm/mpvue-echarts.svg)](https://npmjs.org/package/mpvue-echarts)
 
 
+## 扫码体验
+![小程序码](./static/qrcode.jpg)
+
+
 ## 安装
 
 ``` bash
