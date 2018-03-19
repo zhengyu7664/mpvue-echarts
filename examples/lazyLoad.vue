@@ -13,7 +13,6 @@ import mpvueEcharts from 'mpvue-echarts'
 
 let chart;
 
-
 function initChart(canvas, width, height) {
   chart = echarts.init(canvas, null, {
     width: width,

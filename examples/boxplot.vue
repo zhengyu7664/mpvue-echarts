@@ -9,6 +9,7 @@
 <script>
 import echarts from 'echarts'
 import mpvueEcharts from 'mpvue-echarts'
+
 function initChart(canvas, width, height) {
   const chart = echarts.init(canvas, null, {
     width: width,
