@@ -110,7 +110,7 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
+<style scoped>
 .wrap {
   width: 100%;
   height: 300px;
