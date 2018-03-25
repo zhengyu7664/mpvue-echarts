@@ -83,8 +83,8 @@ export default {
       }).exec();
     },
     touchStart (e) {
-      if (chart && e.touches.length > 0) {
-        var touch = e.touches[0];
+      if (chart && e.mp.touches.length > 0) {
+        var touch = e.mp.touches[0];
         chart._zr.handler.dispatch('mousedown', {
           zrX: touch.x,
           zrY: touch.y
@@ -96,8 +96,8 @@ export default {
       }
     },
     touchMove (e) {
-      if (chart && e.touches.length > 0) {
-        var touch = e.touches[0];
+      if (chart && e.mp.touches.length > 0) {
+        var touch = e.mp.touches[0];
         chart._zr.handler.dispatch('mousemove', {
           zrX: touch.x,
           zrY: touch.y

@@ -120,6 +120,7 @@ function initChart(canvas, width, height) {
   };
 
   chart.setOption(option);
+  return chart;
 }
 
 
