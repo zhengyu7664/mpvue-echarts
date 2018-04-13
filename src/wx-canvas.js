@@ -4,22 +4,19 @@ export default class WxCanvas {
     this.opts = opts || {};
     this.chart = null;
 
-    // this._initCanvas(zrender, ctx);
-    this._initStyle(ctx);
-    this._initEvent();
+    WxCanvas.initStyle(ctx);
+    this.initEvent();
   }
 
   getContext(contextType) {
-    if (contextType === '2d') {
-      return this.ctx;
-    }
+    return contextType === '2d' ? this.ctx : null;
   }
 
   setChart(chart) {
     this.chart = chart;
   }
 
-  attachEvent () {
+  attachEvent() {
     // noop
   }
 
@@ -27,61 +24,48 @@ export default class WxCanvas {
     // noop
   }
 
-  _initCanvas(zrender, ctx) {
-    zrender.util.getContext = function () {
-      return ctx;
-    };
-
-    zrender.util.$override('measureText', function (text, font) {
-      ctx.font = font || '12px sans-serif';
-      return ctx.measureText(text);
-    });
-  }
-
-  _initStyle(ctx) {
-    var styles = ['fillStyle', 'strokeStyle', 'globalAlpha', 
+  static initStyle(ctx) {
+    const styles = ['fillStyle', 'strokeStyle', 'globalAlpha',
       'textAlign', 'textBaseAlign', 'shadow', 'lineWidth',
       'lineCap', 'lineJoin', 'lineDash', 'miterLimit', 'fontSize'];
 
-    styles.forEach(style => {
+    styles.forEach((style) => {
       Object.defineProperty(ctx, style, {
-        set: value => {
-          if (style !== 'fillStyle' && style !== 'strokeStyle' 
-            || value !== 'none' && value !== null
+        set: (value) => {
+          if ((style !== 'fillStyle' && style !== 'strokeStyle')
+            || (value !== 'none' && value !== null)
           ) {
-            ctx['set' + style.charAt(0).toUpperCase() + style.slice(1)](value);
+            ctx[`set${style.charAt(0).toUpperCase()}${style.slice(1)}`](value);
           }
-        }
+        },
       });
     });
 
-    ctx.createRadialGradient = () => {
-      return ctx.createCircularGradient(arguments);
-    };
+    ctx.createRadialGradient = () => ctx.createCircularGradient(arguments);
   }
 
-  _initEvent() {
+  initEvent() {
     this.event = {};
     const eventNames = [{
       wxName: 'touchStart',
-      ecName: 'mousedown'
+      ecName: 'mousedown',
     }, {
       wxName: 'touchMove',
-      ecName: 'mousemove'
+      ecName: 'mousemove',
     }, {
       wxName: 'touchEnd',
-      ecName: 'mouseup'
+      ecName: 'mouseup',
     }, {
       wxName: 'touchEnd',
-      ecName: 'click'
+      ecName: 'click',
     }];
 
-    eventNames.forEach(name => {
-      this.event[name.wxName] = e => {
+    eventNames.forEach((name) => {
+      this.event[name.wxName] = (e) => {
         const touch = e.touches[0];
-        this.chart._zr.handler.dispatch(name.ecName, {
+        this.chart.zr.handler.dispatch(name.ecName, {
           zrX: name.wxName === 'tap' ? touch.clientX : touch.x,
-          zrY: name.wxName === 'tap' ? touch.clientY : touch.y
+          zrY: name.wxName === 'tap' ? touch.clientY : touch.y,
         });
       };
     });

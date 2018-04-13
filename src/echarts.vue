@@ -21,24 +21,24 @@ export default {
       required: true,
       type: Object,
       default() {
-        return null
-      }
+        return null;
+      },
     },
     onInit: {
       required: true,
       type: Function,
-      default: null
+      default: null,
     },
     canvasId: {
       type: String,
-      default: 'ec-canvas'
+      default: 'ec-canvas',
     },
     lazyLoad: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  onReady () {
+  onReady() {
     if (!this.echarts) {
       console.warn('组件需绑定 echarts 变量，例：<ec-canvas id="mychart-dom-bar" '
         + 'canvas-id="mychart-bar" :echarts="echarts"></ec-canvas>');
@@ -48,7 +48,7 @@ export default {
     if (!this.lazyLoad) this.init();
   },
   methods: {
-    init () {
+    init() {
       const version = wx.version.version.split('.').map(n => parseInt(n, 10));
       const isValid = version[0] > 1 || (version[0] === 1 && version[1] > 9)
         || (version[0] === 1 && version[1] === 9 && version[2] >= 91);
@@ -71,8 +71,8 @@ export default {
 
       this.echarts.setCanvasCreator(() => canvas);
 
-      var query = wx.createSelectorQuery();
-      query.select('.ec-canvas').boundingClientRect(res => {
+      const query = wx.createSelectorQuery();
+      query.select('.ec-canvas').boundingClientRect((res) => {
         if (!res) {
           setTimeout(() => this.init(), 50);
           return;
@@ -80,43 +80,43 @@ export default {
         chart = this.onInit(canvas, res.width, res.height);
       }).exec();
     },
-    touchStart (e) {
+    touchStart(e) {
       if (chart && e.mp.touches.length > 0) {
-        var touch = e.mp.touches[0];
-        chart._zr.handler.dispatch('mousedown', {
+        const touch = e.mp.touches[0];
+        chart.zr.handler.dispatch('mousedown', {
           zrX: touch.x,
-          zrY: touch.y
+          zrY: touch.y,
         });
-        chart._zr.handler.dispatch('mousemove', {
+        chart.zr.handler.dispatch('mousemove', {
           zrX: touch.x,
-          zrY: touch.y
+          zrY: touch.y,
         });
       }
     },
-    touchMove (e) {
+    touchMove(e) {
       if (chart && e.mp.touches.length > 0) {
-        var touch = e.mp.touches[0];
-        chart._zr.handler.dispatch('mousemove', {
+        const touch = e.mp.touches[0];
+        chart.zr.handler.dispatch('mousemove', {
           zrX: touch.x,
-          zrY: touch.y
+          zrY: touch.y,
         });
       }
     },
-    touchEnd (e) {
+    touchEnd(e) {
       if (chart) {
         const touch = e.changedTouches ? e.changedTouches[0] : {};
-        chart._zr.handler.dispatch('mouseup', {
+        chart.zr.handler.dispatch('mouseup', {
           zrX: touch.x,
-          zrY: touch.y
+          zrY: touch.y,
         });
-        chart._zr.handler.dispatch('click', {
+        chart.zr.handler.dispatch('click', {
           zrX: touch.x,
-          zrY: touch.y
+          zrY: touch.y,
         });
       }
-    }
-  } 
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
