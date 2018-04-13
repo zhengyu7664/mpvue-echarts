@@ -69,7 +69,7 @@ export default {
 
 这对于所有 ECharts 图表都是通用的，用户只需要修改上面 `option` 的内容，即可改变图表。`option` 的使用方法参见 [ECharts 配置项文档](http://echarts.baidu.com/option.html)。对于不熟悉 ECharts 的用户，可以参见 [5 分钟上手 ECharts](http://echarts.baidu.com/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts) 教程。
 
-完整的例子请参见 [mpvue/examples](https://github.com/mpvue/examples/tree/master/mpvue-echarts) 项目。
+完整的例子请参见 [example](https://github.com/F-loat/mpvue-echarts/tree/example) 分支。
 
 
 ## 属性
