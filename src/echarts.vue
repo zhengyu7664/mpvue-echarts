@@ -69,7 +69,7 @@ export default {
 
       const canvas = new WxCanvas(ctx);
 
-      echarts.setCanvasCreator(() => canvas);
+      this.echarts.setCanvasCreator(() => canvas);
 
       var query = wx.createSelectorQuery();
       query.select('.ec-canvas').boundingClientRect(res => {
