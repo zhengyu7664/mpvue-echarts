@@ -21,7 +21,5 @@
     "url": "https://github.com/F-loat/mpvue-echarts/issues"
   },
   "homepage": "https://github.com/F-loat/mpvue-echarts#readme",
-  "dependencies": {
-    "echarts": "^4.0.4"
-  }
+  "dependencies": {}
 }
