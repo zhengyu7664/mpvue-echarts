@@ -11,41 +11,41 @@
 </template>
 
 <script>
-import * as echarts from 'echarts';
 import WxCanvas from './wx-canvas';
 
 let chart;
 
 export default {
   props: {
-    ec: {
+    echarts: {
+      required: true,
       type: Object,
       default() {
-        return {}
+        return null
       }
+    },
+    onInit: {
+      required: true,
+      type: Function,
+      default: null
     },
     canvasId: {
       type: String,
-      default() {
-        return 'ec-canvas'
-      }
-    }
-  },
-  data () {
-    return {
-      chart: null
+      default: 'ec-canvas'
+    },
+    lazyLoad: {
+      type: Boolean,
+      default: false
     }
   },
   onReady () {
-    if (!this.ec) {
-      console.warn('组件需绑定 ec 变量，例：<ec-canvas id="mychart-dom-bar" '
-        + 'canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>');
+    if (!this.echarts) {
+      console.warn('组件需绑定 echarts 变量，例：<ec-canvas id="mychart-dom-bar" '
+        + 'canvas-id="mychart-bar" :echarts="echarts"></ec-canvas>');
       return;
     }
 
-    if (!this.ec.lazyLoad) {
-      setTimeout(() => this.init(), 50);
-    }
+    if (!this.lazyLoad) this.init();
   },
   methods: {
     init () {
@@ -59,7 +59,7 @@ export default {
         return;
       }
 
-      if (!this.ec.onInit) {
+      if (!this.onInit) {
         console.warn('请传入 onInit 函数进行初始化');
         return;
       }
@@ -69,9 +69,7 @@ export default {
 
       const canvas = new WxCanvas(ctx);
 
-      echarts.setCanvasCreator(() => {
-        return canvas;
-      });
+      echarts.setCanvasCreator(() => canvas);
 
       var query = wx.createSelectorQuery();
       query.select('.ec-canvas').boundingClientRect(res => {
@@ -79,7 +77,7 @@ export default {
           setTimeout(() => this.init(), 50);
           return;
         }
-        chart = this.ec.onInit(canvas, res.width, res.height);
+        chart = this.onInit(canvas, res.width, res.height);
       }).exec();
     },
     touchStart (e) {

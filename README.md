@@ -21,7 +21,7 @@ npm i mpvue-echarts
 ``` vue
 <template>
   <div class="echarts-wrap">
-    <mpvue-echarts :ec="ec" canvasId="demo-canvas" />
+    <mpvue-echarts :echarts="echarts" :onInit="onInit" canvasId="demo-canvas" />
   </div>
 </template>
 
@@ -51,9 +51,8 @@ export default {
   },
   data () {
     return {
-      ec: {
-        onInit: initChart
-      }
+      echarts,
+      onInit: initChart
     }
   }
 }
@@ -77,8 +76,10 @@ export default {
 
 | 名称        | 类型           | 默认值         | 描述           |
 | ------------|--------------- | ------------- | ------------- |
-| ec          | Object         | {}            | echarts 配置  |
+| echarts     | Object         | null          | echarts 对象  |
 | canvasId    | String         | ec-canvas     | canvasId      |
+| onInit      | Function       | null          | 初始化函数     |
+| lazyLoad    | Boolean        | False         | 懒加载         |
 
 
 ## FAQ
@@ -151,8 +152,3 @@ ECharts 中的绝大部分功能都支持小程序版本，因此这里仅说明
 - iOS 平台：渐变色出现在定义区域之外的地方
 
 如有其它问题，也欢迎在 [issue](https://github.com/ecomfe/echarts-for-weixin/issues) 中向我们反馈，谢谢！
-
-
-## Todo
-
-- [x]  ~~支持自定义 echarts 版本~~（突然想到这个利用 webpack 的 alias 实现就好了）
