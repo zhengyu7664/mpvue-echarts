@@ -1,24 +1,24 @@
 <template>
   <div class="container">
     <div class="wrap">
-      <mpvue-echarts :ec="ec" />
+      <mpvue-echarts :echarts="echarts" :onInit="onInit" />
     </div>
   </div>
 </template>
 
 <script>
-import echarts from 'echarts'
+import * as echarts from 'echarts'
 import mpvueEcharts from 'mpvue-echarts'
-import geoJson from './mapData.js';
+import geoJson from './mapData.js'
 
-function initChart(canvas, width, height) {
+function initChart (canvas, width, height) {
   const chart = echarts.init(canvas, null, {
     width: width,
     height: height
-  });
-  canvas.setChart(chart);
+  })
+  canvas.setChart(chart)
 
-  echarts.registerMap('henan', geoJson);
+  echarts.registerMap('henan', geoJson)
 
   const option = {
     tooltip: {
@@ -61,7 +61,7 @@ function initChart(canvas, width, height) {
 
         normal: {
           borderColor: '#389BB7',
-          areaColor: '#fff',
+          areaColor: '#fff'
         },
         emphasis: {
           areaColor: '#389BB7',
@@ -92,27 +92,26 @@ function initChart(canvas, width, height) {
         { name: '开封市', value: 45 }
       ]
 
-    }],
+    }]
 
-  };
+  }
 
-  chart.setOption(option);
+  chart.setOption(option)
 
-  return chart;
+  return chart
 }
 
 export default {
   data () {
     return {
-      ec: {
-        onInit: initChart
-      }
+      echarts,
+      onInit: initChart
     }
   },
 
   components: {
     mpvueEcharts
-  },
+  }
 }
 </script>
 

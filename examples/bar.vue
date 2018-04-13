@@ -1,23 +1,23 @@
 <template>
   <div class="container">
     <div class="wrap">
-      <mpvue-echarts :ec="ec" />
+      <mpvue-echarts :echarts="echarts" :onInit="onInit" />
     </div>
   </div>
 </template>
 
 <script>
-import echarts from 'echarts'
+import * as echarts from 'echarts'
 import mpvueEcharts from 'mpvue-echarts'
 
-let chart = null;
+let chart = null
 
-function initChart(canvas, width, height) {
+function initChart (canvas, width, height) {
   chart = echarts.init(canvas, null, {
     width: width,
     height: height
-  });
-  canvas.setChart(chart);
+  })
+  canvas.setChart(chart)
 
   var option = {
     color: ['#37a2da', '#32c5e9', '#67e0e3'],
@@ -116,24 +116,23 @@ function initChart(canvas, width, height) {
         }
       }
     ]
-  };
+  }
 
-  chart.setOption(option);
-  return chart;
+  chart.setOption(option)
+  return chart
 }
 
 export default {
   data () {
     return {
-      ec: {
-        onInit: initChart
-      }
+      echarts,
+      onInit: initChart
     }
   },
 
   components: {
     mpvueEcharts
-  },
+  }
 }
 </script>
 

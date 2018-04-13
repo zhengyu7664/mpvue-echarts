@@ -1,27 +1,27 @@
 <template>
   <div class="container">
     <div class="wrap">
-      <mpvue-echarts :ec="ec" />
+      <mpvue-echarts :echarts="echarts" :onInit="onInit" />
     </div>
   </div>
 </template>
 
 <script>
-import echarts from 'echarts'
+import * as echarts from 'echarts'
 import mpvueEcharts from 'mpvue-echarts'
 
-function initChart(canvas, width, height) {
+function initChart (canvas, width, height) {
   const chart = echarts.init(canvas, null, {
     width: width,
     height: height
-  });
-  canvas.setChart(chart);
-  var data = [];
+  })
+  canvas.setChart(chart)
+  var data = []
 
   for (var i = 0; i <= 360; i++) {
-    var t = i / 180 * Math.PI;
-    var r = Math.sin(2 * t) * Math.cos(2 * t);
-    data.push([r, i]);
+    var t = i / 180 * Math.PI
+    var r = Math.sin(2 * t) * Math.cos(2 * t)
+    data.push([r, i])
   }
 
   var option = {
@@ -49,7 +49,7 @@ function initChart(canvas, width, height) {
         normal: {
           label: {
             show: true,
-            formatter: "{b}"
+            formatter: '{b}'
           },
           borderWidth: 2
         },
@@ -77,16 +77,16 @@ function initChart(canvas, width, height) {
             children: [{
               value: 1125.5,
               id: 'someid-31',
-              name: '13等地',
+              name: '13等地'
             }, {
               value: 765.63,
               id: 'someid-32',
-              name: '14等地',
+              name: '14等地'
             }, {
               value: 498.12,
               id: 'someid-33',
-              name: '15等地',
-            },],
+              name: '15等地'
+            }],
             label: { // 此节点特殊的 label 定义（如果需要的话）。
               // ...         // label的格式参见 series-treemap.label。
             },
@@ -100,20 +100,20 @@ function initChart(canvas, width, height) {
             children: [{
               value: 1410.69,
               id: 'someid-31',
-              name: '9等地',
+              name: '9等地'
             }, {
               value: 1790.55,
               id: 'someid-32',
-              name: '10等地',
+              name: '10等地'
             }, {
               value: 2045.43,
               id: 'someid-33',
-              name: '11等地',
+              name: '11等地'
             }, {
               value: 1891.85,
               id: 'someid-34',
-              name: '12等地',
-            },],
+              name: '12等地'
+            }]
 
           }, {
             value: 3584.6,
@@ -122,20 +122,20 @@ function initChart(canvas, width, height) {
             children: [{
               value: 366.48,
               id: 'someid-31',
-              name: '5等地',
+              name: '5等地'
             }, {
               value: 886.22,
               id: 'someid-32',
-              name: '6等地',
+              name: '6等地'
             }, {
               value: 1143.89,
               id: 'someid-33',
-              name: '7等地',
+              name: '7等地'
             }, {
               value: 1188.01,
               id: 'someid-34',
-              name: '8等地',
-            },],
+              name: '8等地'
+            }]
 
           }, {
             value: 397.38,
@@ -144,45 +144,44 @@ function initChart(canvas, width, height) {
             children: [{
               value: 48.84,
               id: 'someid-31',
-              name: '1等地',
+              name: '1等地'
             }, {
               value: 59.93,
               id: 'someid-32',
-              name: '2等地',
+              name: '2等地'
             }, {
               value: 115.85,
               id: 'someid-33',
-              name: '3等地',
+              name: '3等地'
             }, {
               value: 172.76,
               id: 'someid-34',
-              name: '4等地',
-            },],
+              name: '4等地'
+            }]
 
           }]
-        },
+        }
       ],
       leafDepth: 2,
-      color: ["#FFA54F", "#FF8040", "#FFD39B", "#FF4500"]
+      color: ['#FFA54F', '#FF8040', '#FFD39B', '#FF4500']
     }]
-  };
+  }
 
-  chart.setOption(option);
-  return chart;
+  chart.setOption(option)
+  return chart
 }
 
 export default {
   data () {
     return {
-      ec: {
-        onInit: initChart
-      }
+      echarts,
+      onInit: initChart
     }
   },
 
   components: {
     mpvueEcharts
-  },
+  }
 }
 </script>
 

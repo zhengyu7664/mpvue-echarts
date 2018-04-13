@@ -1,57 +1,57 @@
 <template>
   <div class="container">
     <div class="wrap">
-      <mpvue-echarts :ec="ec" />
+      <mpvue-echarts :echarts="echarts" :onInit="onInit" />
     </div>
   </div>
 </template>
 
 <script>
-import echarts from 'echarts'
+import * as echarts from 'echarts'
 import mpvueEcharts from 'mpvue-echarts'
 
-function initChart(canvas, width, height) {
+function initChart (canvas, width, height) {
   const chart = echarts.init(canvas, null, {
     width: width,
     height: height
-  });
-  canvas.setChart(chart);
+  })
+  canvas.setChart(chart)
   var data1 = {
-    "name": "root",
-    "children": [{
-      "name": "a",
-      "children": [{
-        "name": "a1"
+    'name': 'root',
+    'children': [{
+      'name': 'a',
+      'children': [{
+        'name': 'a1'
       }, {
-        "name": "a2"
+        'name': 'a2'
       }, {
-        "name": "a3"
+        'name': 'a3'
       }, {
-        "name": "a4"
+        'name': 'a4'
       }]
     }, {
-      "name": "b",
-      "children": [{
-        "name": "b1"
+      'name': 'b',
+      'children': [{
+        'name': 'b1'
       }, {
-        "name": "b2"
+        'name': 'b2'
       }, {
-        "name": "b3"
+        'name': 'b3'
       }, {
-        "name": "b4"
+        'name': 'b4'
       }]
     }, {
-      "name": "c",
-      "children": [{
-        "name": "c1"
+      'name': 'c',
+      'children': [{
+        'name': 'c1'
       }]
     }, {
-      "name": "d",
-      "children": [{
-        "name": "d1"
+      'name': 'd',
+      'children': [{
+        'name': 'd1'
       }]
     }]
-  };
+  }
 
   var option = {
     series: [{
@@ -81,24 +81,23 @@ function initChart(canvas, width, height) {
       }
 
     }]
-  };
+  }
 
-  chart.setOption(option);
-  return chart;
+  chart.setOption(option)
+  return chart
 }
 
 export default {
   data () {
     return {
-      ec: {
-        onInit: initChart
-      }
+      echarts,
+      onInit: initChart
     }
   },
 
   components: {
     mpvueEcharts
-  },
+  }
 }
 </script>
 

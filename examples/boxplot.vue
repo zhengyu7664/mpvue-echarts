@@ -1,21 +1,21 @@
 <template>
   <div class="container">
     <div class="wrap">
-      <mpvue-echarts :ec="ec" />
+      <mpvue-echarts :echarts="echarts" :onInit="onInit" />
     </div>
   </div>
 </template>
 
 <script>
-import echarts from 'echarts'
+import * as echarts from 'echarts'
 import mpvueEcharts from 'mpvue-echarts'
 
-function initChart(canvas, width, height) {
+function initChart (canvas, width, height) {
   const chart = echarts.init(canvas, null, {
     width: width,
     height: height
-  });
-  canvas.setChart(chart);
+  })
+  canvas.setChart(chart)
 
   var option = {
     title: {
@@ -25,8 +25,8 @@ function initChart(canvas, width, height) {
       textStyle: {
         color: '#3259B8',
         fontSize: 16,
-        fontWeight: 'normal',
-      },
+        fontWeight: 'normal'
+      }
     },
     tooltip: {
       trigger: 'item',
@@ -36,7 +36,7 @@ function initChart(canvas, width, height) {
     },
     grid: {
       left: '15%',
-      right: '10%',
+      right: '10%'
 
     },
     xAxis: {
@@ -45,15 +45,15 @@ function initChart(canvas, width, height) {
 
       nameTextStyle: {
         color: '#3259B8',
-        fontSize: 14,
+        fontSize: 14
 
       },
       axisTick: {
-        show: false,
+        show: false
       },
       axisLine: {
         lineStyle: {
-          color: '#3259B8',
+          color: '#3259B8'
         }
       },
       splitLine: {
@@ -65,20 +65,20 @@ function initChart(canvas, width, height) {
       type: 'value',
       nameTextStyle: {
         color: '#3259B8',
-        fontSize: 14,
+        fontSize: 14
       },
       axisLabel: {
-        formatter: '{value}\nCNY/㎡',
+        formatter: '{value}\nCNY/㎡'
       },
       axisLine: {
         lineStyle: {
-          color: '#3259B8',
+          color: '#3259B8'
         }
       },
       splitLine: {
         lineStyle: {
-          color: '#A7BAFA',
-        },
+          color: '#A7BAFA'
+        }
       }
 
     },
@@ -90,38 +90,38 @@ function initChart(canvas, width, height) {
           53490,
           66640.5,
           89123,
-          159949,
+          159949
         ],
         [19464,
           46454,
           59139,
           83479,
-          179440,
+          179440
         ],
         [16704,
           46041,
           60155,
           86818,
-          159980,
+          159980
         ],
         [21543,
           41619.75,
           58819.5,
           87540,
-          159978,
+          159978
         ],
         [15202,
           35757,
           44721,
           59916.5,
-          159825,
+          159825
         ],
         [22158,
           34754.5,
           49718,
           71637,
-          139972,
-        ],
+          139972
+        ]
       ],
       itemStyle: {
         normal: {
@@ -155,7 +155,7 @@ function initChart(canvas, width, height) {
               color: 'rgba(62,172,299,0.7)' // 100% 处的颜色
             }],
             globalCoord: false // 缺省为 false
-          },
+          }
         }
       },
       tooltip: {
@@ -169,27 +169,26 @@ function initChart(canvas, width, height) {
           ].join('<br/>')
         }
       }
-    },
+    }
 
     ]
-  };
+  }
 
-  chart.setOption(option);
-  return chart;
+  chart.setOption(option)
+  return chart
 }
 
 export default {
   data () {
     return {
-      ec: {
-        onInit: initChart
-      }
+      echarts,
+      onInit: initChart
     }
   },
 
   components: {
     mpvueEcharts
-  },
+  }
 }
 </script>
 

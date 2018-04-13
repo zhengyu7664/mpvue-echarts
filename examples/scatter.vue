@@ -1,24 +1,24 @@
 <template>
   <div class="container">
     <div class="wrap">
-      <mpvue-echarts :ec="ec" />
+      <mpvue-echarts :echarts="echarts" :onInit="onInit" />
     </div>
   </div>
 </template>
 
 <script>
-import echarts from 'echarts'
+import * as echarts from 'echarts'
 import mpvueEcharts from 'mpvue-echarts'
 
-function initChart(canvas, width, height) {
+function initChart (canvas, width, height) {
   const chart = echarts.init(canvas, null, {
     width: width,
     height: height
-  });
-  canvas.setChart(chart);
+  })
+  canvas.setChart(chart)
 
-  var data = [];
-  var data2 = [];
+  var data = []
+  var data2 = []
 
   for (var i = 0; i < 10; i++) {
     data.push(
@@ -27,14 +27,14 @@ function initChart(canvas, width, height) {
         Math.round(Math.random() * 100),
         Math.round(Math.random() * 40)
       ]
-    );
+    )
     data2.push(
       [
         Math.round(Math.random() * 100),
         Math.round(Math.random() * 100),
         Math.round(Math.random() * 100)
       ]
-    );
+    )
   }
 
   var axisCommon = {
@@ -59,10 +59,10 @@ function initChart(canvas, width, height) {
         type: 'solid'
       }
     }
-  };
+  }
 
   var option = {
-    color: ["#FF7070", "#60B6E3"],
+    color: ['#FF7070', '#60B6E3'],
     backgroundColor: '#eee',
     xAxis: axisCommon,
     yAxis: axisCommon,
@@ -88,28 +88,26 @@ function initChart(canvas, width, height) {
     }
     ],
     animationDelay: function (idx) {
-      return idx * 50;
+      return idx * 50
     },
     animationEasing: 'elasticOut'
-  };
+  }
 
-
-  chart.setOption(option);
-  return chart;
+  chart.setOption(option)
+  return chart
 }
 
 export default {
   data () {
     return {
-      ec: {
-        onInit: initChart
-      }
+      echarts,
+      onInit: initChart
     }
   },
 
   components: {
     mpvueEcharts
-  },
+  }
 }
 </script>
 

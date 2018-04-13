@@ -1,17 +1,17 @@
 <template>
   <div class="wrap">
-    <mpvue-echarts :ec="ecBar" canvasId="bar" />
-    <mpvue-echarts :ec="ecScatter" canvasId="scatter" />
+    <mpvue-echarts :echarts="echarts" :onInit="ecBarInit" canvasId="bar" />
+    <mpvue-echarts :echarts="echarts" :onInit="ecScatterInit" canvasId="scatter" />
   </div>
 </template>
 
 <script>
-import echarts from 'echarts'
+import * as echarts from 'echarts'
 import mpvueEcharts from 'mpvue-echarts'
 
 let barChart, scatterChart
 
-function getBarOption() {
+function getBarOption () {
   return {
     color: ['#37a2da', '#32c5e9', '#67e0e3'],
     tooltip: {
@@ -94,13 +94,12 @@ function getBarOption() {
         data: [-20, -32, -21, -34, -90, -130, -110]
       }
     ]
-  };
+  }
 }
 
-function getScatterOption() {
-
-  var data = [];
-  var data2 = [];
+function getScatterOption () {
+  var data = []
+  var data2 = []
 
   for (var i = 0; i < 10; i++) {
     data.push(
@@ -109,14 +108,14 @@ function getScatterOption() {
         Math.round(Math.random() * 100),
         Math.round(Math.random() * 40)
       ]
-    );
+    )
     data2.push(
       [
         Math.round(Math.random() * 100),
         Math.round(Math.random() * 100),
         Math.round(Math.random() * 100)
       ]
-    );
+    )
   }
 
   var axisCommon = {
@@ -141,10 +140,10 @@ function getScatterOption() {
         type: 'solid'
       }
     }
-  };
+  }
 
   return {
-    color: ["#FF7070", "#60B6E3"],
+    color: ['#FF7070', '#60B6E3'],
     backgroundColor: '#eee',
     xAxis: axisCommon,
     yAxis: axisCommon,
@@ -170,45 +169,42 @@ function getScatterOption() {
     }
     ],
     animationDelay: function (idx) {
-      return idx * 50;
+      return idx * 50
     },
     animationEasing: 'elasticOut'
-  };
+  }
 }
 
 export default {
   data () {
     return {
-      ecBar: {
-        onInit: function (canvas, width, height) {
-          barChart = echarts.init(canvas, null, {
-            width: width,
-            height: height
-          });
-          canvas.setChart(barChart);
+      echarts,
+      ecBarInit: function (canvas, width, height) {
+        barChart = echarts.init(canvas, null, {
+          width: width,
+          height: height
+        })
+        canvas.setChart(barChart)
 
-          barChart.setOption(getBarOption());
-          return barChart;
-        }
+        barChart.setOption(getBarOption())
+        return barChart
       },
-      ecScatter: {
-        onInit: function (canvas, width, height) {
-          scatterChart = echarts.init(canvas, null, {
-            width: width,
-            height: height
-          });
-          canvas.setChart(scatterChart);
+      ecScatterInit: function (canvas, width, height) {
+        scatterChart = echarts.init(canvas, null, {
+          width: width,
+          height: height
+        })
+        canvas.setChart(scatterChart)
 
-          scatterChart.setOption(getScatterOption());
-          return scatterChart;
-        }
+        scatterChart.setOption(getScatterOption())
+        return scatterChart
       }
     }
   },
 
   components: {
     mpvueEcharts
-  },
+  }
 }
 </script>
 

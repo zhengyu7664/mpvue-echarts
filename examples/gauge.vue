@@ -1,25 +1,25 @@
 <template>
   <div class="container">
     <div class="wrap">
-      <mpvue-echarts :ec="ec" />
+      <mpvue-echarts :echarts="echarts" :onInit="onInit" />
     </div>
   </div>
 </template>
 
 <script>
-import echarts from 'echarts'
+import * as echarts from 'echarts'
 import mpvueEcharts from 'mpvue-echarts'
 
-function initChart(canvas, width, height) {
+function initChart (canvas, width, height) {
   const chart = echarts.init(canvas, null, {
     width: width,
     height: height
-  });
-  canvas.setChart(chart);
+  })
+  canvas.setChart(chart)
 
   var option = {
-    backgroundColor: "#ffffff",
-    color: ["#37A2DA", "#32C5E9", "#67E0E3"],
+    backgroundColor: '#ffffff',
+    color: ['#37A2DA', '#32C5E9', '#67E0E3'],
     series: [{
       name: '业务指标',
       type: 'gauge',
@@ -40,29 +40,27 @@ function initChart(canvas, width, height) {
       },
       data: [{
         value: 40,
-        name: '完成率',
+        name: '完成率'
       }]
 
     }]
-  };
+  }
 
-  chart.setOption(option, true);
-  return chart;
+  chart.setOption(option, true)
+  return chart
 }
-
 
 export default {
   data () {
     return {
-      ec: {
-        onInit: initChart
-      }
+      echarts,
+      onInit: initChart
     }
   },
 
   components: {
     mpvueEcharts
-  },
+  }
 }
 </script>
 
