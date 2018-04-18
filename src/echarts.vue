@@ -98,11 +98,11 @@ export default {
     touchStart(e) {
       if (!this.disableTouch && chart && e.mp.touches.length > 0) {
         const touch = e.mp.touches[0];
-        chart.zr.handler.dispatch('mousedown', {
+        chart._zr.handler.dispatch('mousedown', {
           zrX: touch.x,
           zrY: touch.y,
         });
-        chart.zr.handler.dispatch('mousemove', {
+        chart._zr.handler.dispatch('mousemove', {
           zrX: touch.x,
           zrY: touch.y,
         });
@@ -111,7 +111,7 @@ export default {
     touchMove(e) {
       if (!this.disableTouch && chart && e.mp.touches.length > 0) {
         const touch = e.mp.touches[0];
-        chart.zr.handler.dispatch('mousemove', {
+        chart._zr.handler.dispatch('mousemove', {
           zrX: touch.x,
           zrY: touch.y,
         });
@@ -120,11 +120,11 @@ export default {
     touchEnd(e) {
       if (!this.disableTouch && chart) {
         const touch = e.changedTouches ? e.changedTouches[0] : {};
-        chart.zr.handler.dispatch('mouseup', {
+        chart._zr.handler.dispatch('mouseup', {
           zrX: touch.x,
           zrY: touch.y,
         });
-        chart.zr.handler.dispatch('click', {
+        chart._zr.handler.dispatch('click', {
           zrX: touch.x,
           zrY: touch.y,
         });
