@@ -79,7 +79,8 @@ export default {
 | echarts     | Object         | null          | echarts 对象  |
 | canvasId    | String         | ec-canvas     | canvasId      |
 | onInit      | Function       | null          | 初始化函数     |
-| lazyLoad    | Boolean        | False         | 懒加载         |
+| lazyLoad    | Boolean        | false         | 懒加载         |
+| disableTouch| Boolean        | false         | 禁用触摸事件   |
 
 
 ## FAQ
@@ -92,7 +93,7 @@ export default {
 
 ### 如何延迟加载图表？
 
-参见 `examples/lazyLoad` 的例子，可以在获取数据后再初始化数据。 
+参见 `examples/lazyLoad` 的例子，可以在获取数据后再初始化数据。
 
 ### 如何在一个页面中加载多个图表？
 

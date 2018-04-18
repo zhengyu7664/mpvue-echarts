@@ -14,6 +14,7 @@
 import WxCanvas from './wx-canvas';
 
 let chart;
+let ctx;
 
 export default {
   props: {
@@ -34,6 +35,10 @@ export default {
       default: 'ec-canvas',
     },
     lazyLoad: {
+      type: Boolean,
+      default: false,
+    },
+    disableTouch: {
       type: Boolean,
       default: false,
     },
@@ -65,9 +70,9 @@ export default {
       }
 
       const { canvasId } = this;
-      const ctx = wx.createCanvasContext(canvasId);
+      ctx = wx.createCanvasContext(canvasId);
 
-      const canvas = new WxCanvas(ctx);
+      const canvas = new WxCanvas(ctx, canvasId);
 
       this.echarts.setCanvasCreator(() => canvas);
 
@@ -80,8 +85,18 @@ export default {
         chart = this.onInit(canvas, res.width, res.height);
       }).exec();
     },
+    canvasToTempFilePath(opt) {
+      const { canvasId } = this;
+
+      ctx.draw(true, () => {
+        wx.canvasToTempFilePath({
+          canvasId,
+          ...opt,
+        });
+      });
+    },
     touchStart(e) {
-      if (chart && e.mp.touches.length > 0) {
+      if (!this.disableTouch && chart && e.mp.touches.length > 0) {
         const touch = e.mp.touches[0];
         chart.zr.handler.dispatch('mousedown', {
           zrX: touch.x,
@@ -94,7 +109,7 @@ export default {
       }
     },
     touchMove(e) {
-      if (chart && e.mp.touches.length > 0) {
+      if (!this.disableTouch && chart && e.mp.touches.length > 0) {
         const touch = e.mp.touches[0];
         chart.zr.handler.dispatch('mousemove', {
           zrX: touch.x,
@@ -103,7 +118,7 @@ export default {
       }
     },
     touchEnd(e) {
-      if (chart) {
+      if (!this.disableTouch && chart) {
         const touch = e.changedTouches ? e.changedTouches[0] : {};
         chart.zr.handler.dispatch('mouseup', {
           zrX: touch.x,

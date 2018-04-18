@@ -1,7 +1,7 @@
 export default class WxCanvas {
-  constructor(ctx, domId, opts) {
+  constructor(ctx, canvasId) {
     this.ctx = ctx;
-    this.opts = opts || {};
+    this.canvasId = canvasId;
     this.chart = null;
 
     WxCanvas.initStyle(ctx);
