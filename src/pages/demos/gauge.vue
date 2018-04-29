@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import * as echarts from 'echarts'
+import * as echarts from '@/libs/echarts.gauge.min'
 import mpvueEcharts from 'mpvue-echarts'
 
 function initChart (canvas, width, height) {
