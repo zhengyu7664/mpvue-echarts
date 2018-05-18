@@ -50,7 +50,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        include: [resolve('src'), resolve('node_modules/mpvue-entry')],
+        include: [resolve('src'), /mpvue-entry/],
         exclude: [resolve('src/libs')],
         use: [
           'babel-loader',
