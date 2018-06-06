@@ -119,7 +119,7 @@ export default {
     },
     touchEnd(e) {
       if (!this.disableTouch && chart) {
-        const touch = e.changedTouches ? e.changedTouches[0] : {};
+        const touch = e.mp.changedTouches ? e.mp.changedTouches[0] : {};
         chart._zr.handler.dispatch('mouseup', {
           zrX: touch.x,
           zrY: touch.y,
