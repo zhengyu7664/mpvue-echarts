@@ -15,6 +15,7 @@ import WxCanvas from './wx-canvas';
 
 let chart;
 let ctx;
+let lastMoveTime = 0;
 
 export default {
   props: {
@@ -87,7 +88,6 @@ export default {
     },
     canvasToTempFilePath(opt) {
       const { canvasId } = this;
-
       ctx.draw(true, () => {
         wx.canvasToTempFilePath({
           canvasId,
@@ -111,10 +111,14 @@ export default {
     touchMove(e) {
       if (!this.disableTouch && chart && e.mp.touches.length > 0) {
         const touch = e.mp.touches[0];
-        chart._zr.handler.dispatch('mousemove', {
-          zrX: touch.x,
-          zrY: touch.y,
-        });
+        const currMoveTime = Date.now();
+        if (currMoveTime - lastMoveTime > 240) {
+          chart._zr.handler.dispatch('mousemove', {
+            zrX: touch.x,
+            zrY: touch.y,
+          });
+          lastMoveTime = currMoveTime;
+        }
       }
     },
     touchEnd(e) {
