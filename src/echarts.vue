@@ -115,8 +115,8 @@ export default {
       const { disableTouch, throttleTouch } = this;
       if (disableTouch || !chart || !e.mp.touches.length) return;
 
-      const currMoveTime = Date.now();
       if (throttleTouch) {
+        const currMoveTime = Date.now();
         if (currMoveTime - lastMoveTime < 240) return;
         lastMoveTime = currMoveTime;
       }
