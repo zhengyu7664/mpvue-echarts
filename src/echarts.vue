@@ -43,6 +43,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    throttleTouch: {
+      type: Boolean,
+      default: false,
+    },
   },
   onReady() {
     if (!this.echarts) {
@@ -96,43 +100,44 @@ export default {
       });
     },
     touchStart(e) {
-      if (!this.disableTouch && chart && e.mp.touches.length > 0) {
-        const touch = e.mp.touches[0];
-        chart._zr.handler.dispatch('mousedown', {
-          zrX: touch.x,
-          zrY: touch.y,
-        });
-        chart._zr.handler.dispatch('mousemove', {
-          zrX: touch.x,
-          zrY: touch.y,
-        });
-      }
+      if (this.disableTouch || !chart || !e.mp.touches.length) return;
+      const touch = e.mp.touches[0];
+      chart._zr.handler.dispatch('mousedown', {
+        zrX: touch.x,
+        zrY: touch.y,
+      });
+      chart._zr.handler.dispatch('mousemove', {
+        zrX: touch.x,
+        zrY: touch.y,
+      });
     },
     touchMove(e) {
-      if (!this.disableTouch && chart && e.mp.touches.length > 0) {
-        const touch = e.mp.touches[0];
-        const currMoveTime = Date.now();
-        if (currMoveTime - lastMoveTime > 240) {
-          chart._zr.handler.dispatch('mousemove', {
-            zrX: touch.x,
-            zrY: touch.y,
-          });
-          lastMoveTime = currMoveTime;
-        }
+      const { disableTouch, throttleTouch } = this;
+      if (disableTouch || !chart || !e.mp.touches.length) return;
+
+      const currMoveTime = Date.now();
+      if (throttleTouch) {
+        if (currMoveTime - lastMoveTime < 240) return;
+        lastMoveTime = currMoveTime;
       }
+
+      const touch = e.mp.touches[0];
+      chart._zr.handler.dispatch('mousemove', {
+        zrX: touch.x,
+        zrY: touch.y,
+      });
     },
     touchEnd(e) {
-      if (!this.disableTouch && chart) {
-        const touch = e.mp.changedTouches ? e.mp.changedTouches[0] : {};
-        chart._zr.handler.dispatch('mouseup', {
-          zrX: touch.x,
-          zrY: touch.y,
-        });
-        chart._zr.handler.dispatch('click', {
-          zrX: touch.x,
-          zrY: touch.y,
-        });
-      }
+      if (this.disableTouch || !chart) return;
+      const touch = e.mp.changedTouches ? e.mp.changedTouches[0] : {};
+      chart._zr.handler.dispatch('mouseup', {
+        zrX: touch.x,
+        zrY: touch.y,
+      });
+      chart._zr.handler.dispatch('click', {
+        zrX: touch.x,
+        zrY: touch.y,
+      });
     },
   },
 };

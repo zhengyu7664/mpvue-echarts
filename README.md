@@ -74,13 +74,14 @@ export default {
 
 ## 属性
 
-| 名称        | 类型           | 默认值         | 描述           |
-| ------------|--------------- | ------------- | ------------- |
-| echarts     | Object         | null          | echarts 对象  |
-| canvasId    | String         | ec-canvas     | canvasId      |
-| onInit      | Function       | null          | 初始化函数     |
-| lazyLoad    | Boolean        | false         | 懒加载         |
-| disableTouch| Boolean        | false         | 禁用触摸事件   |
+| 名称         | 类型           | 默认值         | 描述           |
+| -------------|--------------- | ------------- | ------------- |
+| echarts      | Object         | null          | echarts 对象  |
+| canvasId     | String         | ec-canvas     | canvasId      |
+| onInit       | Function       | null          | 初始化函数     |
+| lazyLoad     | Boolean        | false         | 懒加载         |
+| disableTouch | Boolean        | false         | 禁用触摸事件   |
+| throttleTouch| Boolean        | false         | 节流触摸事件   |
 
 
 ## FAQ
@@ -98,6 +99,10 @@ export default {
 ### 如何在一个页面中加载多个图表？
 
 参见 `examples/multiCharts` 的例子。
+
+### 图表变空白？
+
+尝试设置 `throttleTouch` 属性为 `true`。
 
 ### 为什么不支持 Tooltip？
 
