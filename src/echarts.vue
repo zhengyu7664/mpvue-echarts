@@ -13,10 +13,6 @@
 <script>
 import WxCanvas from './wx-canvas';
 
-let chart;
-let ctx;
-let lastMoveTime = 0;
-
 export default {
   props: {
     echarts: {
@@ -75,9 +71,9 @@ export default {
       }
 
       const { canvasId } = this;
-      ctx = wx.createCanvasContext(canvasId);
+      this.ctx = wx.createCanvasContext(canvasId);
 
-      const canvas = new WxCanvas(ctx, canvasId);
+      const canvas = new WxCanvas(this.ctx, canvasId);
 
       this.echarts.setCanvasCreator(() => canvas);
 
@@ -87,12 +83,12 @@ export default {
           setTimeout(() => this.init(), 50);
           return;
         }
-        chart = this.onInit(canvas, res.width, res.height);
+        this.chart = this.onInit(canvas, res.width, res.height);
       }).exec();
     },
     canvasToTempFilePath(opt) {
       const { canvasId } = this;
-      ctx.draw(true, () => {
+      this.ctx.draw(true, () => {
         wx.canvasToTempFilePath({
           canvasId,
           ...opt,
@@ -100,7 +96,8 @@ export default {
       });
     },
     touchStart(e) {
-      if (this.disableTouch || !chart || !e.mp.touches.length) return;
+      const { disableTouch, chart } = this;
+      if (disableTouch || !chart || !e.mp.touches.length) return;
       const touch = e.mp.touches[0];
       chart._zr.handler.dispatch('mousedown', {
         zrX: touch.x,
@@ -112,13 +109,15 @@ export default {
       });
     },
     touchMove(e) {
-      const { disableTouch, throttleTouch } = this;
+      const {
+        disableTouch, throttleTouch, chart, lastMoveTime,
+      } = this;
       if (disableTouch || !chart || !e.mp.touches.length) return;
 
       if (throttleTouch) {
         const currMoveTime = Date.now();
         if (currMoveTime - lastMoveTime < 240) return;
-        lastMoveTime = currMoveTime;
+        this.lastMoveTime = currMoveTime;
       }
 
       const touch = e.mp.touches[0];
@@ -128,7 +127,8 @@ export default {
       });
     },
     touchEnd(e) {
-      if (this.disableTouch || !chart) return;
+      const { disableTouch, chart } = this;
+      if (disableTouch || !chart) return;
       const touch = e.mp.changedTouches ? e.mp.changedTouches[0] : {};
       chart._zr.handler.dispatch('mouseup', {
         zrX: touch.x,
