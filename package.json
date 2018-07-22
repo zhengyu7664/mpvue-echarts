@@ -7,6 +7,9 @@
     "lint": "eslint --format node_modules/eslint-friendly-formatter --ext .js,.vue src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/F-loat/mpvue-echarts.git"
