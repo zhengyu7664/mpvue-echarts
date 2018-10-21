@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="container">
     <a class="link"
       v-for="(chart, index) of charts"
@@ -6,6 +7,8 @@
       :key="index"
       :href="chart.path">{{chart.config.navigationBarTitleText}}</a>
   </div>
+  <ad unit-id="adunit-162e15806841e6e8"></ad>
+</div>
 </template>
 
 <script>
