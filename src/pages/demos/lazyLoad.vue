@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import * as echarts from '@/libs/echarts.simple.min'
+import * as echarts from 'echarts/dist/echarts.simple.min'
 import mpvueEcharts from 'mpvue-echarts'
 
 let chart = null

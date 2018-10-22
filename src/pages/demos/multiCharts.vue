@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import * as echarts from 'echarts'
+import * as echarts from 'echarts/dist/echarts.min'
 import mpvueEcharts from 'mpvue-echarts'
 
 let barChart, scatterChart
