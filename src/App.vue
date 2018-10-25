@@ -20,5 +20,6 @@ export default {
   padding: 10rpx 0;
   box-sizing: border-box;
   flex-wrap: wrap;
+  background-color: #fff;
 }
 </style>
