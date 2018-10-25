@@ -61,7 +61,9 @@ export default {
 
   components: {
     mpvueEcharts
-  }
+  },
+
+  onShareAppMessage () {}
 }
 </script>
 

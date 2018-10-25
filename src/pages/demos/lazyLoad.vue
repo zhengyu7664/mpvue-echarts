@@ -136,7 +136,9 @@ export default {
       chart.setOption(this.option)
       return chart
     }
-  }
+  },
+
+  onShareAppMessage () {}
 }
 </script>
 

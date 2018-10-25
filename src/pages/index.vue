@@ -19,7 +19,9 @@ export default {
     return {
       charts
     }
-  }
+  },
+
+  onShareAppMessage () {}
 }
 </script>
 
