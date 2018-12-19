@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import charts from '@/pages'
+import config from '@/app.json'
 
 export default {
   data () {
     return {
-      charts
+      charts: config.pages
     }
   },
 
