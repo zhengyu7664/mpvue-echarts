@@ -15,7 +15,7 @@ npm run dev
 npm run build
 
 # build for production and view the bundle analyzer report
-npm run build --report
+npm run build -- --analyze
 ```
 
 示例使用 mpvue-packager 进行构建，具体配置请查阅[相关文档](https://github.com/F-loat/mpvue-packager)
