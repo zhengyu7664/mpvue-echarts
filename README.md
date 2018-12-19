@@ -69,8 +69,6 @@ export default {
 
 这对于所有 ECharts 图表都是通用的，用户只需要修改上面 `option` 的内容，即可改变图表。`option` 的使用方法参见 [ECharts 配置项文档](http://echarts.baidu.com/option.html)。对于不熟悉 ECharts 的用户，可以参见 [5 分钟上手 ECharts](http://echarts.baidu.com/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts) 教程。
 
-完整的例子请参见 [example](https://github.com/F-loat/mpvue-echarts/tree/example) 分支。
-
 
 ## 属性
 
@@ -92,13 +90,17 @@ export default {
 
 `echarts.init` 返回的即为图表实例。
 
+### 打包结果超过小程序大小限制？
+
+使用自定义版 echarts，[官网定制](http://echarts.baidu.com/builder.html)
+
 ### 如何延迟加载图表？
 
-参见 `examples/lazyLoad` 的例子，可以在获取数据后再初始化数据。
+参见 [examples/lazyLoad](./examples/src/pages/demos/lazyLoad.vue) 的例子，可以在获取数据后再初始化数据。
 
 ### 如何在一个页面中加载多个图表？
 
-参见 `examples/multiCharts` 的例子。
+参见 [examples/multiCharts](./examples/src/pages/demos/multiCharts.vue) 的例子。
 
 ### 图表变空白？
 
