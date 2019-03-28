@@ -15,7 +15,7 @@
 import WxCanvas from './wx-canvas';
 
 function wrapTouch(e) {
-  for (let i = 0; i < e.mp.touches.length; ++i) {
+  for (let i = 0; i < e.mp.touches.length; i += 1) {
     const touch = e.mp.touches[i];
     touch.offsetX = touch.x;
     touch.offsetY = touch.y;
@@ -96,8 +96,17 @@ export default {
         } else if (typeof this.onInit === 'function') {
           this.chart = this.onInit(canvas, width, height);
         } else {
-          this.$emit('init', { canvas, width, height });
+          this.chart = this.$emit('init', { canvas, width, height });
         }
+
+        if (!this.chart) {
+          return;
+        }
+
+        const { handler } = this.chart.getZr();
+
+        this.handler = handler;
+        this.processGesture = handler.proxy.processGesture || (() => {});
       }).exec();
     },
     canvasToTempFilePath(opt) {
@@ -113,17 +122,15 @@ export default {
       const { disableTouch, chart } = this;
       if (disableTouch || !chart || !e.mp.touches.length) return;
       const touch = e.mp.touches[0];
-      const { handler } = this.chart.getZr();
-      handler.dispatch('mousedown', {
+      this.handler.dispatch('mousedown', {
         zrX: touch.x,
         zrY: touch.y,
       });
-      handler.dispatch('mousemove', {
+      this.handler.dispatch('mousemove', {
         zrX: touch.x,
         zrY: touch.y,
       });
-      const { processGesture } = handler.proxy;
-      processGesture && processGesture(wrapTouch(e), 'start');
+      this.processGesture(wrapTouch(e), 'start');
     },
     touchMove(e) {
       const {
@@ -138,29 +145,25 @@ export default {
       }
 
       const touch = e.mp.touches[0];
-      const { handler } = this.chart.getZr();
-      handler.dispatch('mousemove', {
+      this.handler.dispatch('mousemove', {
         zrX: touch.x,
         zrY: touch.y,
       });
-      const { processGesture } = handler.proxy;
-      processGesture && processGesture(wrapTouch(e), 'change');
+      this.processGesture(wrapTouch(e), 'change');
     },
     touchEnd(e) {
       const { disableTouch, chart } = this;
       if (disableTouch || !chart) return;
       const touch = e.mp.changedTouches ? e.mp.changedTouches[0] : {};
-      const { handler } = this.chart.getZr();
-      handler.dispatch('mouseup', {
+      this.handler.dispatch('mouseup', {
         zrX: touch.x,
         zrY: touch.y,
       });
-      handler.dispatch('click', {
+      this.handler.dispatch('click', {
         zrX: touch.x,
         zrY: touch.y,
       });
-      const { processGesture } = handler.proxy;
-      processGesture && processGesture(wrapTouch(e), 'end');
+      this.processGesture(wrapTouch(e), 'end');
     },
   },
 };
