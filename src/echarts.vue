@@ -122,7 +122,8 @@ export default {
         zrX: touch.x,
         zrY: touch.y,
       });
-      handler.proxy.processGesture(wrapTouch(e), 'start');
+      const { processGesture } = handler.proxy;
+      processGesture && processGesture(wrapTouch(e), 'start');
     },
     touchMove(e) {
       const {
@@ -142,7 +143,8 @@ export default {
         zrX: touch.x,
         zrY: touch.y,
       });
-      handler.proxy.processGesture(wrapTouch(e), 'change');
+      const { processGesture } = handler.proxy;
+      processGesture && processGesture(wrapTouch(e), 'change');
     },
     touchEnd(e) {
       const { disableTouch, chart } = this;
@@ -157,7 +159,8 @@ export default {
         zrX: touch.x,
         zrY: touch.y,
       });
-      handler.proxy.processGesture(wrapTouch(e), 'end');
+      const { processGesture } = handler.proxy;
+      processGesture && processGesture(wrapTouch(e), 'end');
     },
   },
 };
