@@ -33,7 +33,6 @@ export default {
       },
     },
     onInit: {
-      required: true,
       type: Function,
       default: null,
     },
