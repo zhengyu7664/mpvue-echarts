@@ -1,4 +1,7 @@
-export declare class Ecahrts {
+import Vue from 'vue'
+
+/** Echarts Component */
+export declare class Ecahrts extends Vue {
   echarts: object
   onInit?: () => object
   canvasId?: string
