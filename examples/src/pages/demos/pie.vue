@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="wrap">
-      <mpvue-echarts :echarts="echarts" @init="echartInit" />
+      <mpvue-echarts :echarts="echarts" :onInit="echartInit" />
     </div>
   </div>
 </template>
@@ -72,8 +72,8 @@ export default {
   },
 
   methods: {
-    echartInit (e) {
-      initChart(e.detail.canvas, e.detail.width, e.detail.height)
+    echartInit (canvas, width, height) {
+      return initChart(canvas, width, height)
     }
   },
 

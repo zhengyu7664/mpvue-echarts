@@ -94,8 +94,6 @@ export default {
           this.chart = callback(canvas, width, height);
         } else if (typeof this.onInit === 'function') {
           this.chart = this.onInit(canvas, width, height);
-        } else {
-          this.chart = this.$emit('init', { canvas, width, height });
         }
 
         if (!this.chart) {
